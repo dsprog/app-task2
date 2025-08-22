@@ -39,7 +39,7 @@
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 antialiased" x-data="{
     sidebarOpen: localStorage.getItem('sidebarOpen') === null ? window.innerWidth >= 1024 : localStorage.getItem('sidebarOpen') === 'true',
-    toggleSidebar() { 
+    toggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
         localStorage.setItem('sidebarOpen', this.sidebarOpen);
     },
@@ -50,7 +50,13 @@
         }
     },
     formSubmitted: false,
-}">
+    darkMode: localStorage.getItem('darkMode') === 'true',
+    toggleSidebar() { this.sidebarOpen = !this.sidebarOpen },
+    toggleDarkMode() {
+        this.darkMode = !this.darkMode;
+        localStorage.setItem('darkMode', this.darkMode);
+    },
+}" :class="{ 'dark': darkMode }">
 
     <!-- Main Container -->
     <div class="min-h-screen flex flex-col">
@@ -89,7 +95,7 @@
                                 </div>
                                 <div class="ml-auto pl-3">
                                     <div class="-mx-1.5 -my-1.5">
-                                        <button @click="showStatusMessage = false"
+                                        <button @click="setAppearance = false"
                                             class="inline-flex rounded-md p-1.5 text-green-500 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                             <span class="sr-only">{{ __('Dismiss') }}</span>
                                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
